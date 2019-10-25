@@ -1,5 +1,5 @@
 <?php
 
 return [
-    "env_locked" => "Bu ayar şu anda kilitli."
+    'env_locked' => 'Bu ayar şu anda kilitli.',
 ];
