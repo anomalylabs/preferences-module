@@ -1,13 +1,10 @@
 <?php
 
 return [
-    "name" => [
-        "name" => "isim",
-
+    'name'        => [
+        'name' => 'İsim',
     ],
-    "description" => [
-        "name" => "Açıklama",
-
+    'description' => [
+        'name' => 'Açıklamalar',
     ],
-
 ];
