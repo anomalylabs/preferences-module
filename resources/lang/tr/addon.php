@@ -5,12 +5,12 @@ return [
     "name" => "Tercihler Modülü",
     "description" => "Bir tercih yönetimi aracı.",
     "section" => [
-        "system" => "sistem",
+        "system" => "Sistem",
         "themes" => "Temalar",
-        "plugins" => "eklentiler",
+        "plugins" => "Eklentiler",
         "modules" => "Modüller",
         "extensions" => "Uzantıları",
-        "field_types" => "Alan türleri",
+        "field_types" => "Alan Türleri",
 
     ],
 
