@@ -30,7 +30,7 @@ class PreferenceModel extends PreferencesPreferencesEntryModel implements Prefer
     public function field()
     {
         /* @var FieldType $field */
-        $field = $this->dispatch(new GetValueFieldType($this));
+        $field = $this->dispatchSync(new GetValueFieldType($this));
 
         if (!$field) {
             return null;
@@ -127,7 +127,7 @@ class PreferenceModel extends PreferencesPreferencesEntryModel implements Prefer
      */
     protected function setValueAttribute($value)
     {
-        $this->attributes['value'] = $this->dispatch(new ModifyValue($this, $value));
+        $this->attributes['value'] = $this->dispatchSync(new ModifyValue($this, $value));
 
         return $this;
     }
@@ -159,7 +159,7 @@ class PreferenceModel extends PreferencesPreferencesEntryModel implements Prefer
     public function getFieldTypePresenter($fieldSlug)
     {
         if ($fieldSlug == 'value') {
-            return $this->dispatch(new GetValuePresenter($this));
+            return $this->dispatchSync(new GetValuePresenter($this));
         }
 
         return parent::getFieldTypePresenter($fieldSlug);
