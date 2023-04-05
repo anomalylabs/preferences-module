@@ -28,7 +28,7 @@ class PreferencesModulePlugin extends Plugin
             new \Twig_SimpleFunction(
                 'preference_value',
                 function ($key, $default = null) {
-                    return $this->dispatchSync(new GetPreferenceValue($key, $default));
+                    return dispatch_sync(new GetPreferenceValue($key, $default));
                 }
             ),
             new \Twig_SimpleFunction(
@@ -36,11 +36,11 @@ class PreferencesModulePlugin extends Plugin
                 function ($key) {
 
                     /* @var PreferenceInterface $preference */
-                    if (!$preference = $this->dispatchSync(new GetPreference($key))) {
+                    if (!$preference = dispatch_sync(new GetPreference($key))) {
                         return null;
                     }
 
-                    return (new Decorator())->decorate($this->dispatchSync(new GetValueFieldType($preference)));
+                    return (new Decorator())->decorate(dispatch_sync(new GetValueFieldType($preference)));
                 }
             ),
         ];

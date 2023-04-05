@@ -3,7 +3,6 @@
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Illuminate\Contracts\Config\Repository;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class GetValuePresenter
@@ -14,9 +13,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  */
 class GetValuePresenter
 {
-
-    use DispatchesJobs;
-
     /**
      * The preference instance.
      *
@@ -42,7 +38,7 @@ class GetValuePresenter
     public function handle()
     {
         /* @var FieldType $type */
-        if ($type = $this->dispatchSync(new GetValueFieldType($this->preference))) {
+        if ($type = dispatch_sync(new GetValueFieldType($this->preference))) {
             return $type->getPresenter();
         }
 

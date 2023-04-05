@@ -2,7 +2,6 @@
 
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class ModifyValue
@@ -13,9 +12,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  */
 class ModifyValue
 {
-
-    use DispatchesJobs;
-
     /**
      * The preference value.
      *
@@ -50,7 +46,7 @@ class ModifyValue
     public function handle()
     {
         /* @var FieldType $type */
-        if ($type = $this->dispatchSync(new GetValueFieldType($this->preference))) {
+        if ($type = dispatch_sync(new GetValueFieldType($this->preference))) {
             return $type->getModifier()->modify($this->value);
         }
 
