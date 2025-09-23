@@ -6,6 +6,7 @@ use Anomaly\PreferencesModule\Preference\Command\GetValueFieldType;
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceInterface;
 use Anomaly\Streams\Platform\Addon\Plugin\Plugin;
 use Anomaly\Streams\Platform\Support\Decorator;
+use Twig\TwigFunction;
 
 /**
  * Class PreferencesModulePlugin
@@ -25,13 +26,13 @@ class PreferencesModulePlugin extends Plugin
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction(
+            new TwigFunction(
                 'preference_value',
                 function ($key, $default = null) {
                     return dispatch_sync(new GetPreferenceValue($key, $default));
                 }
             ),
-            new \Twig_SimpleFunction(
+            new TwigFunction(
                 'preference',
                 function ($key) {
 
