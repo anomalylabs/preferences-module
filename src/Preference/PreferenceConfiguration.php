@@ -29,15 +29,27 @@ class PreferenceConfiguration
     protected $evaluator;
 
     /**
+     * The preference environment.
+     *
+     * @var PreferenceEnvironment
+     */
+    protected $environment;
+
+    /**
      * Create a new PreferenceConfiguration instance.
      *
      * @param PreferenceRepositoryInterface $preferences
      * @param Evaluator $evaluator
+     * @param PreferenceEnvironment $environment
      */
-    public function __construct(PreferenceRepositoryInterface $preferences, Evaluator $evaluator)
-    {
+    public function __construct(
+        PreferenceRepositoryInterface $preferences,
+        Evaluator $evaluator,
+        PreferenceEnvironment $environment
+    ) {
         $this->preferences = $preferences;
         $this->evaluator   = $evaluator;
+        $this->environment = $environment;
     }
 
     /**
@@ -61,7 +73,7 @@ class PreferenceConfiguration
              * If the preference has a value in .env representing
              * this preference then skip it since it's already set.
              */
-            if (isset($preference['env']) && env($preference['env']) !== null) {
+            if ($this->environment->pinned($preference)) {
                 continue;
             }
 
@@ -109,7 +121,7 @@ class PreferenceConfiguration
              * If the preference has a value in .env representing
              * this preference then skip it since it's already set.
              */
-            if (isset($preference['env']) && env($preference['env']) !== null) {
+            if ($this->environment->pinned($preference)) {
                 continue;
             }
 

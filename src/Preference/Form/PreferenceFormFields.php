@@ -1,6 +1,7 @@
 <?php namespace Anomaly\PreferencesModule\Preference\Form;
 
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
+use Anomaly\PreferencesModule\Preference\PreferenceEnvironment;
 use Illuminate\Contracts\Config\Repository;
 
 
@@ -35,9 +36,14 @@ class PreferenceFormFields
      * Return the form fields.
      *
      * @param PreferenceFormBuilder $builder
+     * @param PreferenceRepositoryInterface $preferences
+     * @param PreferenceEnvironment $environment
      */
-    public function handle(PreferenceFormBuilder $builder, PreferenceRepositoryInterface $preferences)
-    {
+    public function handle(
+        PreferenceFormBuilder $builder,
+        PreferenceRepositoryInterface $preferences,
+        PreferenceEnvironment $environment
+    ) {
         $namespace = $builder->getEntry() . '::';
 
         /*
@@ -135,7 +141,7 @@ class PreferenceFormFields
              * Disable the field if it
              * has a set env value.
              */
-            if (isset($field['env']) && isset($field['bind']) && env($field['env']) !== null) {
+            if (isset($field['bind']) && $environment->pinned($field)) {
                 $field['disabled'] = true;
                 $field['warning']  = 'module::message.env_locked';
                 $field['value']    = $this->config->get($field['bind']);

@@ -5,6 +5,7 @@ use Anomaly\PreferencesModule\Preference\Command\ConfigureSystem;
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
 use Anomaly\PreferencesModule\Preference\Listener\DeleteExtensionPreferences;
 use Anomaly\PreferencesModule\Preference\Listener\DeleteModulePreferences;
+use Anomaly\PreferencesModule\Preference\PreferenceEnvironment;
 use Anomaly\PreferencesModule\Preference\PreferenceModel;
 use Anomaly\PreferencesModule\Preference\PreferenceRepository;
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
@@ -66,6 +67,7 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
      */
     protected $singletons = [
         PreferenceRepositoryInterface::class => PreferenceRepository::class,
+        PreferenceEnvironment::class         => PreferenceEnvironment::class,
     ];
 
     /**
